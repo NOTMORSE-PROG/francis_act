@@ -1,0 +1,67 @@
+{% extends 'store/base.html' %}
+
+{% block title %}ShopAI — Add Product{% endblock %}
+
+{% block content %}
+
+<div style="max-width:580px;margin:0 auto;">
+    <div style="margin-bottom:1.5rem;">
+        <a href="/" class="btn btn-outline">&larr; Back to Products</a>
+    </div>
+
+    <div class="form-card">
+        <h2>📦 Add New Product</h2>
+
+        <form method="post" id="productForm">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="id_name">Product Name</label>
+                {{ form.name }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_description">Description</label>
+                {{ form.description }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_price">Price (&#8369;)</label>
+                {{ form.price }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_category">Category</label>
+                {{ form.category }}
+            </div>
+
+            <div class="ai-hint">
+                🤖 <span><strong>AI Tags</strong> will be auto-generated using OpenAI when you submit!</span>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-success" id="submitBtn">
+                    ✅ Add Product
+                </button>
+                <a href="/" class="btn btn-outline">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Add attrs to form inputs for better UX
+    document.getElementById('id_name').placeholder = 'e.g. Wireless Headphones';
+    document.getElementById('id_description').placeholder = 'Describe the product...';
+    document.getElementById('id_price').placeholder = '0.00';
+    document.getElementById('id_category').placeholder = 'e.g. Electronics';
+
+    // Show loading state on submit
+    document.getElementById('productForm').addEventListener('submit', function() {
+        const btn = document.getElementById('submitBtn');
+        btn.textContent = '⏳ Saving & generating AI tags...';
+        btn.disabled = true;
+    });
+</script>
+
+{% endblock %}

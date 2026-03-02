@@ -1,14 +1,37 @@
-.env
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
 *.pyo
+*.pyc
 *.pyd
-.Python
-*.egg-info/
-dist/
-build/
-.venv/
+
+# Virtual environments
 venv/
 env/
+.venv/
+ENV/
+
+# Django
+*.log
+*.pot
+db.sqlite3
+*.sqlite3
+media/
+staticfiles/
+
+# Environment variables
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
 .DS_Store
 Thumbs.db
+
+# Migrations (optional — keep if you want version control of migrations)
+# store/migrations/*.py
+# !store/migrations/__init__.py

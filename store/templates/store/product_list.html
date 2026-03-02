@@ -1,0 +1,70 @@
+{% extends 'store/base.html' %}
+
+{% block title %}ShopAI — Product List{% endblock %}
+
+{% block content %}
+
+<div class="hero">
+    <div>
+        <h1>Welcome to ShopAI</h1>
+        <p>Discover products with AI-powered recommendations just for you.</p>
+    </div>
+    <div class="hero-emoji">🤖</div>
+</div>
+
+<!-- ALL PRODUCTS -->
+<div class="section-header">
+    <h2>🛒 All Products <span style="color:#718096;font-weight:400;font-size:1rem;">({{ products|length }})</span></h2>
+    <a href="/add/" class="btn btn-primary">+ Add Product</a>
+</div>
+
+{% if products %}
+<div class="product-grid">
+    {% for product in products %}
+    <div class="product-card">
+        <span class="category-badge">{{ product.category }}</span>
+        <h3>{{ product.name }}</h3>
+        <p class="desc">{{ product.description }}</p>
+        <div class="price">&#8369;{{ product.price }}</div>
+        {% if product.tags %}
+        <div class="tags">
+            {% for tag in product.tags.split %}
+            <span class="tag">{{ tag|cut:"," }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="empty-state">
+    <div class="emoji">📦</div>
+    <p>No products yet. <a href="/add/" style="color:#6c63ff;">Add the first one!</a></p>
+</div>
+{% endif %}
+
+<!-- AI RECOMMENDATIONS -->
+<div class="section-header">
+    <h2>✨ Recommended For You</h2>
+</div>
+
+{% if recommendations %}
+<div class="product-grid">
+    {% for product in recommendations %}
+    <div class="product-card rec-card">
+        <span class="rec-label">⭐ Pick</span>
+        <span class="category-badge">{{ product.category }}</span>
+        <h3>{{ product.name }}</h3>
+        <p class="desc">{{ product.description }}</p>
+        <div class="price">&#8369;{{ product.price }}</div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="empty-state">
+    <div class="emoji">🤖</div>
+    <p>Add more products so AI can recommend them!</p>
+</div>
+{% endif %}
+
+{% endblock %}
