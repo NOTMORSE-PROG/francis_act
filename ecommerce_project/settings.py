@@ -54,12 +54,9 @@ WSGI_APPLICATION = 'ecommerce_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'djongo',
+        'ENGINE': 'django_mongodb_backend',
+        'HOST': os.environ.get('MONGO_URI', 'mongodb://localhost:27017'),
         'NAME': 'ecommerce_db',
-        'ENFORCE_SCHEMA': False,
-        'CLIENT': {
-            'host': os.environ.get('MONGO_URI', 'mongodb://localhost:27017'),
-        }
     }
 }
 
