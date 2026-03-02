@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: flask-docker-app
+    runtime: python
+    buildCommand: pip install -r app/requirements.txt
+    startCommand: gunicorn --chdir app --bind 0.0.0.0:$PORT --workers 2 main:app
+    envVars:
+      - key: MONGO_URI
+        sync: false
